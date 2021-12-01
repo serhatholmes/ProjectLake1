@@ -433,6 +433,18 @@ MonoBehaviour:
   rotationSpeed: 7
   SprintButton: 304
   WalkButton: 306
+--- !u!114 &369722386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369722380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2259f23fdde0a34e991de4f750475ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &389440173
 GameObject:
   m_ObjectHideFlags: 0
