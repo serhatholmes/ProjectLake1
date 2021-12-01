@@ -427,9 +427,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b23a73eb7a5fb7b44a25e373e8b0ccb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprintFov: 65
   Player: {fileID: 369722384}
   damp: 2
   rotationSpeed: 7
+  SprintButton: 304
+  WalkButton: 306
 --- !u!1 &389440173
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,7 +985,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: 49a0e923d39ec3c4c8bb97699e2f2903, type: 3}
       propertyPath: m_SensorSize.x
-      value: 70.41
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: 49a0e923d39ec3c4c8bb97699e2f2903, type: 3}
       propertyPath: m_SensorSize.y
