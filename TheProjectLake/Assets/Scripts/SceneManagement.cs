@@ -12,6 +12,8 @@ public class SceneManagement : MonoBehaviour
 
     public static bool GameIsPaused = false;
 
+    public Texture2D cursorArrow;
+
     public void PlayGame()
     {
         SceneManager.LoadScene("Game");
@@ -65,6 +67,8 @@ public class SceneManagement : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 1;
+
+        Cursor.SetCursor(cursorArrow, Vector2.zero, CursorMode.ForceSoftware);
     }
 
     public void Update()

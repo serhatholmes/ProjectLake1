@@ -1849,6 +1849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PausePanel: {fileID: 1556570651}
+  cursorArrow: {fileID: 2800000, guid: 51cb6ee928f89b64691ef4dfd57c03e9, type: 3}
 --- !u!225 &879682920
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2824,7 +2825,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1556570652
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3538,6 +3539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PausePanel: {fileID: 1556570651}
+  cursorArrow: {fileID: 0}
 --- !u!4 &1999273614
 Transform:
   m_ObjectHideFlags: 0
