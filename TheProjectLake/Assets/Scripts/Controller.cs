@@ -13,6 +13,9 @@ public class Controller : MonoBehaviour
 
     public Transform Player;
 
+    public AudioSource walkSound;
+    public AudioClip clip;
+
     Animator anim;
 
     Vector3 StickDirection;
@@ -25,10 +28,13 @@ public class Controller : MonoBehaviour
     public float rotationSpeed;
 
     float maxSpeed;
+    public float jumpSpeed;
+
+    private float ySpeed;
 
     public KeyCode SprintButton = KeyCode.LeftShift;
     public KeyCode WalkButton = KeyCode.LeftControl;
-
+    public KeyCode JumpButton = KeyCode.Space;
 
     void Start()
     {
@@ -55,6 +61,13 @@ public class Controller : MonoBehaviour
         //yön belirlemek için
         StickDirection = new Vector3(inputX, 0, inputY);
 
+        if(!walkSound.isPlaying)
+        {
+            walkSound.loop = true;
+            walkSound.Play();
+        }
+        
+
         if (Input.GetKey(SprintButton))
         {
             //kamerayý uzaklaþtýrma,koþma efekti için
@@ -63,6 +76,8 @@ public class Controller : MonoBehaviour
             maxSpeed = 1.5f;
             inputX =2 * Input.GetAxis("Horizontal");
             inputY =2 * Input.GetAxis("Vertical");
+            walkSound.Play();
+            walkSound.pitch = 2f;
         }
 
         else if(Input.GetKey(WalkButton))
@@ -71,6 +86,8 @@ public class Controller : MonoBehaviour
             maxSpeed = 0.3f;
             inputX = Input.GetAxis("Horizontal");
             inputY = Input.GetAxis("Vertical");
+            walkSound.Play();
+            walkSound.pitch = 0.7f;
         }
 
         else
@@ -79,9 +96,16 @@ public class Controller : MonoBehaviour
             maxSpeed = 1f;
             inputX = Input.GetAxis("Horizontal");
             inputY = Input.GetAxis("Vertical");
+            walkSound.Play();
+            walkSound.pitch = 1.1f;
         }
 
+        ySpeed += Physics.gravity.y * Time.deltaTime;
 
+        if( Input.GetButtonDown("JumpButton"))
+        {
+            
+        }
        
         
     }

@@ -1301,7 +1301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PausePanel: {fileID: 0}
-  cursorArrow: {fileID: 0}
+  cursorArrow: {fileID: 2800000, guid: 51cb6ee928f89b64691ef4dfd57c03e9, type: 3}
 --- !u!1 &2047238017
 GameObject:
   m_ObjectHideFlags: 0
