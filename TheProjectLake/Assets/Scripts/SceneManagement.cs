@@ -24,16 +24,19 @@ public class SceneManagement : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene("StartMenu");
+        Cursor.SetCursor(cursorArrow, Vector2.zero, CursorMode.ForceSoftware);
     }
 
     public void Options()
     {
         SceneManager.LoadScene("Options");
+        Cursor.SetCursor(cursorArrow, Vector2.zero, CursorMode.ForceSoftware);
     }
 
     public void GameOver()
     {
         SceneManager.LoadScene("GameOver");
+        Cursor.SetCursor(cursorArrow, Vector2.zero, CursorMode.ForceSoftware);
     }
 
     public void ExitGame()
