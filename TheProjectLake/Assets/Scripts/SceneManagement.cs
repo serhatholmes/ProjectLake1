@@ -16,9 +16,14 @@ public class SceneManagement : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("Game");
+       
+        SceneManager.LoadSceneAsync("Game");
+        
+       
     }
 
+
+    
     
 
     public void MainMenu()

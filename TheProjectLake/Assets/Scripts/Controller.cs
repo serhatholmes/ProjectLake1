@@ -29,6 +29,7 @@ public class Controller : MonoBehaviour
     public KeyCode SprintButton = KeyCode.LeftShift;
     public KeyCode WalkButton = KeyCode.LeftControl;
 
+    public float health = 100f;
 
     void Start()
     {
