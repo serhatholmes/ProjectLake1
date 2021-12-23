@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    bool isStafe = false;
+
+
+
+   /* bool isStafe = false;
     Animator anim;
 
     public GameObject handWeapon;
@@ -35,4 +38,5 @@ public class WeaponController : MonoBehaviour
         sideWeapon.SetActive(true);
         handWeapon.SetActive(false);
     }
+   */
 }
