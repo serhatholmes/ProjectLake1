@@ -14,12 +14,15 @@ namespace SoulsLike
         private Rigidbody rb;
         private Vector3 mMovement;
         private Quaternion rotation;
+        public Camera cam;
 
         // Start is called before the first frame update
         void Start()
         {
 
             rb = GetComponent<Rigidbody>();
+ 
+            
         }
 
         // Update is called once per frame
@@ -29,21 +32,29 @@ namespace SoulsLike
             float horizontalInput = Input.GetAxis("Horizontal");
             float verticalInput = Input.GetAxis("Vertical");
 
-            mMovement = new Vector3(horizontalInput, 0, verticalInput);
+            mMovement.Set(horizontalInput,0,verticalInput);
             mMovement.Normalize();
 
 
+            //Vector3 desiredForward = Vector3.RotateTowards(transform.forward,mMovement,rotationSpeed * Time.fixedDeltaTime,0);
 
-            Vector3 desiredForward = Vector3.RotateTowards(transform.forward,mMovement,Time.fixedDeltaTime*rotationSpeed,0);
+           /* mMovement = new Vector3(horizontalInput, 0, verticalInput);
+            mMovement.Normalize(); */
+
+    
+            // Vector3 desiredForward = Vector3.RotateTowards(transform.forward,mMovement,Time.fixedDeltaTime*rotationSpeed,0);
 
            // Debug.Log("FORWARD:" + transform.forward.magnitude);
            // Debug.Log("MOVEMENT:" + mMovement.magnitude);
 
 
-            rotation = Quaternion.LookRotation(desiredForward);
+           // rotation = Quaternion.LookRotation(desiredForward);
 
             rb.MovePosition(rb.position + mMovement * speed * Time.fixedDeltaTime);
-            rb.MoveRotation(rotation);
+
+            //Quaternion rotation = Quaternion.LookRotation(desiredForward);
+            
+            //rb.MoveRotation(rotation);
 
         }
     }
