@@ -474,7 +474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 3, z: -5}
+  m_FollowOffset: {x: 0, y: 2.0230858, z: -5.708457}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -715,7 +715,7 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_YAxis:
-    Value: 0.5
+    Value: 0.3
     m_SpeedMode: 0
     m_MaxSpeed: 0
     m_AccelTime: 0.2
@@ -788,7 +788,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 237321917}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 54.427467, y: 73.270004, z: 12.3030815}
+  m_LocalPosition: {x: 54.427467, y: 72.29309, z: 11.5946245}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 327496294}
@@ -1025,7 +1025,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 327496292}
-  m_LocalRotation: {x: 0.14788072, y: -0, z: -0, w: 0.9890052}
+  m_LocalRotation: {x: 0.048226595, y: -1e-45, z: -0, w: 0.99883646}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1323,7 +1323,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 393011901}
-  m_LocalRotation: {x: 0.11755089, y: -0.00000001708709, z: 0.0000000020226258, w: 0.9930669}
+  m_LocalRotation: {x: 0.017642625, y: -0.0000000018623553, z: 3.286195e-11, w: 0.9998444}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3443,6 +3443,7 @@ GameObject:
   - component: {fileID: 1219266832}
   - component: {fileID: 1219266831}
   - component: {fileID: 1219266836}
+  - component: {fileID: 1219266835}
   m_Layer: 0
   m_Name: NewMainCam
   m_TagString: MainCamera
@@ -3541,13 +3542,26 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1219266830}
-  m_LocalRotation: {x: 0.1175509, y: -0.00000001710231, z: 0.0000000020207822, w: 0.9930669}
-  m_LocalPosition: {x: 54.427467, y: 73.270004, z: 12.3030815}
+  m_LocalRotation: {x: 0.0054938216, y: -0.00000001569586, z: -3.8476805e-11, w: 0.999985}
+  m_LocalPosition: {x: 54.427467, y: 72.29309, z: 11.5946245}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 766707881}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 26.413, y: 0, z: 0}
+--- !u!114 &1219266835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219266830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43160b5e9d816ef439e5c338e42207d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freeLookCamera: {fileID: 237321918}
 --- !u!114 &1219266836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3647,7 +3661,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1308620433}
-  m_LocalRotation: {x: 0.08733768, y: 0.000000008570316, z: -7.513825e-10, w: 0.9961788}
+  m_LocalRotation: {x: -0.012730338, y: 8.159496e-10, z: 1.0388155e-11, w: 0.999919}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4374,7 +4388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 3, z: -5}
+  m_FollowOffset: {x: 0, y: 2.0230858, z: -5.708457}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -4686,7 +4700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 3, z: -5}
+  m_FollowOffset: {x: 0, y: 2.0230858, z: -5.708457}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -5812,10 +5826,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 980899504, guid: c4a0f15071b4bdc45a2a5cd05945fda4, type: 3}
-      propertyPath: freeLookCamera
-      value: 
-      objectReference: {fileID: 237321918}
     - target: {fileID: 4938371952301830847, guid: c4a0f15071b4bdc45a2a5cd05945fda4, type: 3}
       propertyPath: m_RootOrder
       value: 1

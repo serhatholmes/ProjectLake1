@@ -14,6 +14,10 @@ namespace SoulsLike
         public float maxForwardSpeed = 4;
         public float rotationSpeed;
 
+        public float mMaxRotationSpeed = 1200;
+        public float mMinRotationSpeed = 800;
+        public float gravity = 20.0f;
+
 
         private PlayerInput mPlayerInput;
         private CharacterController chCont;
@@ -29,13 +33,15 @@ namespace SoulsLike
 
         private float desiredForwardSpeed;
         private float forwardSpeed;
+        private float mVerticalSpeed;
 
         private void Awake()
         {
             chCont = GetComponent<CharacterController>();
-            mainCamController = GetComponent<CameraController>();
+      
             mPlayerInput = GetComponent<PlayerInput>();
             mAnimator = GetComponent<Animator>();
+            mainCamController = Camera.main.GetComponent<CameraController>();
 
         }
 
@@ -43,11 +49,18 @@ namespace SoulsLike
         // Update is called once per frame
         void FixedUpdate()
         {
-            ComputeMovement();
+            ComputeForwardMovement();
+            ComputeVerticalMovement();
             ComputeRotation();
 
             if(mPlayerInput.IsMoveInput)
             {
+                float rotationSpeed = Mathf.Lerp(mMaxRotationSpeed, mMinRotationSpeed, forwardSpeed / desiredForwardSpeed);
+                mTargetRotation = Quaternion.RotateTowards(
+                    transform.rotation,
+                    mTargetRotation,
+                    rotationSpeed * Time.fixedDeltaTime);
+
                 transform.rotation = mTargetRotation;
 
             }
@@ -75,7 +88,22 @@ namespace SoulsLike
 
         }
 
-        private void ComputeMovement()
+        private void ComputeVerticalMovement()
+        {
+            mVerticalSpeed = -gravity;
+        }
+
+
+        private void OnAnimatorMove()
+        {
+            Vector3 movement = mAnimator.deltaPosition;
+            movement += mVerticalSpeed * Vector3.up * Time.fixedDeltaTime;
+            
+            chCont.Move(movement);
+        }
+
+
+        private void ComputeForwardMovement()
         {
             Vector3 moveInput = mPlayerInput.MoveInput.normalized;
 
@@ -93,11 +121,20 @@ namespace SoulsLike
         {
             Vector3 moveInput = mPlayerInput.MoveInput.normalized;
 
-            Vector3 cameraDirection = Quaternion.Euler(0,mainCamController.freeLookCamera.m_XAxis.Value,0) * Vector3.forward;
+            Vector3 cameraDirection = Quaternion.Euler(0, mainCamController.PlayerCam.m_XAxis.Value, 0) * Vector3.forward;
 
-            Quaternion movementRotation = Quaternion.FromToRotation(Vector3.forward, moveInput);
+            
+            Quaternion targetRotation;
 
-            Quaternion targetRotation = Quaternion.LookRotation(movementRotation * cameraDirection);
+            if (Mathf.Approximately(Vector3.Dot(moveInput, Vector3.forward), -1.0f))
+            {
+                targetRotation = Quaternion.LookRotation(-cameraDirection);
+            }
+            else
+            {
+                Quaternion movementRotation = Quaternion.FromToRotation(Vector3.forward, moveInput);
+                targetRotation = Quaternion.LookRotation(movementRotation * cameraDirection);
+            }
 
             mTargetRotation = targetRotation;
 
