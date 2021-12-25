@@ -29,7 +29,7 @@ public class FollowCam : MonoBehaviour
 
         Vector3 rotatedPosition = currentRotation * Vector3.forward;
 
-        transform.position -= rotatedPosition * 10;
+        transform.position -= rotatedPosition * 5;
 
         transform.LookAt(target);
     }

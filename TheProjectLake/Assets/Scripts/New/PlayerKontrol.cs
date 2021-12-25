@@ -8,54 +8,100 @@ namespace SoulsLike
 
     public class PlayerKontrol : MonoBehaviour
     {
-        public float speed;
+        const float kAcceleration = 20f;
+        const float kDeceleration = 200f;
+
+        public float maxForwardSpeed = 4;
         public float rotationSpeed;
 
-        private Rigidbody rb;
+
+        private PlayerInput mPlayerInput;
+        private CharacterController chCont;
         private Vector3 mMovement;
-        private Quaternion rotation;
-        public Camera cam;
+        
+        
+        private CameraController mainCamController;
+        private Animator mAnimator;
 
-        // Start is called before the first frame update
-        void Start()
+        private readonly int HashForwardSpeed = Animator.StringToHash("ForwardSpeed");
+
+        private Quaternion mTargetRotation;
+
+        private float desiredForwardSpeed;
+        private float forwardSpeed;
+
+        private void Awake()
         {
+            chCont = GetComponent<CharacterController>();
+            mainCamController = GetComponent<CameraController>();
+            mPlayerInput = GetComponent<PlayerInput>();
+            mAnimator = GetComponent<Animator>();
 
-            rb = GetComponent<Rigidbody>();
- 
-            
         }
 
+    
         // Update is called once per frame
         void FixedUpdate()
         {
+            ComputeMovement();
+            ComputeRotation();
 
-            float horizontalInput = Input.GetAxis("Horizontal");
-            float verticalInput = Input.GetAxis("Vertical");
+            if(mPlayerInput.IsMoveInput)
+            {
+                transform.rotation = mTargetRotation;
 
-            mMovement.Set(horizontalInput,0,verticalInput);
-            mMovement.Normalize();
+            }
+            /* float horizontalInput = Input.GetAxis("Horizontal");
+             float verticalInput = Input.GetAxis("Vertical");
 
-
-            //Vector3 desiredForward = Vector3.RotateTowards(transform.forward,mMovement,rotationSpeed * Time.fixedDeltaTime,0);
-
-           /* mMovement = new Vector3(horizontalInput, 0, verticalInput);
-            mMovement.Normalize(); */
-
-    
-            // Vector3 desiredForward = Vector3.RotateTowards(transform.forward,mMovement,Time.fixedDeltaTime*rotationSpeed,0);
-
-           // Debug.Log("FORWARD:" + transform.forward.magnitude);
-           // Debug.Log("MOVEMENT:" + mMovement.magnitude);
+             mMovement.Set(horizontalInput,0,verticalInput);
+             */
+            /*
+                Vector3 moveInput = mPlayerInput.MoveInput;
 
 
-           // rotation = Quaternion.LookRotation(desiredForward);
+                Quaternion camRotation = mainCam.transform.rotation;
 
-            rb.MovePosition(rb.position + mMovement * speed * Time.fixedDeltaTime);
+                Vector3 targetDirection = camRotation * moveInput;
+                targetDirection.y = 0;
+
+                */
+            //chCont.Move(targetDirection.normalized * speed * Time.fixedDeltaTime);
 
             //Quaternion rotation = Quaternion.LookRotation(desiredForward);
-            
+
+            //chCont.transform.rotation = Quaternion.Euler(0, camRotation.eulerAngles.y, 0);
             //rb.MoveRotation(rotation);
 
         }
+
+        private void ComputeMovement()
+        {
+            Vector3 moveInput = mPlayerInput.MoveInput.normalized;
+
+            desiredForwardSpeed = moveInput.magnitude * maxForwardSpeed;
+
+            float acceleration = mPlayerInput.IsMoveInput ? kAcceleration : kDeceleration;
+
+            forwardSpeed = Mathf.MoveTowards(forwardSpeed, desiredForwardSpeed, Time.fixedDeltaTime * 25);
+
+            mAnimator.SetFloat(HashForwardSpeed, forwardSpeed);
+
+        }
+
+        private void ComputeRotation()
+        {
+            Vector3 moveInput = mPlayerInput.MoveInput.normalized;
+
+            Vector3 cameraDirection = Quaternion.Euler(0,mainCamController.freeLookCamera.m_XAxis.Value,0) * Vector3.forward;
+
+            Quaternion movementRotation = Quaternion.FromToRotation(Vector3.forward, moveInput);
+
+            Quaternion targetRotation = Quaternion.LookRotation(movementRotation * cameraDirection);
+
+            mTargetRotation = targetRotation;
+
+        }
+
     }
 }
