@@ -8,23 +8,34 @@ namespace SoulsLike
 {
     public class EnemyBehaviour : MonoBehaviour
     {
-        public float detectionRadius = 8.0f;
-        public float detectionAngle = 140.0f;
+
+        public PlayerScanner playerScanner;
+
         public float timeToStopPursuit = 2.0f;
+        public float timeToWaitOnPursuit = 2.0f;
 
         private PlayerKontrol mTarget;
-        private NavMeshAgent mNavMestAgent;
+        private EnemyKontrol mEnemyKontrol;
+
+        //private NavMeshAgent mNavMeshAgent;
         private float mTimeSinceLostTarget = 0;
+        private Vector3 mOriginalPosition;
+        private Animator mAnimator;
+
+        private readonly int HashInPursuit = Animator.StringToHash("InPursuit");
+        private readonly int HashNearBase = Animator.StringToHash("NearBase");
 
         private void Awake()
         {
-            mNavMestAgent = GetComponent<NavMeshAgent>();
+            mEnemyKontrol = GetComponent<EnemyKontrol>();
+            mOriginalPosition = transform.position;
+            mAnimator = GetComponent<Animator>();
         }
         private void Update()
         {
             //Debug.Log(PlayerKontrol.Instance);
-            LookForPlayer();
-            var target = LookForPlayer();
+            //LookForPlayer();
+            var target = playerScanner.Detect(transform);
 
             //if (!mTarget) { return; }
             if(mTarget==null)
@@ -37,7 +48,8 @@ namespace SoulsLike
             else
 
             {
-                mNavMestAgent.SetDestination(mTarget.transform.position);
+                mEnemyKontrol.SetFollowTarget(mTarget.transform.position);
+                mAnimator.SetBool(HashInPursuit, true);
 
                 if (target == null)
                 {
@@ -45,7 +57,10 @@ namespace SoulsLike
                     if(mTimeSinceLostTarget >= timeToStopPursuit)
                     {
                         mTarget = null;
-                        Debug.Log("stopping the enemy!");
+                        //Debug.Log("stopping the enemy!");
+                        //mNavMeshAgent.isStopped = true;
+                        mAnimator.SetBool("InPursuit", false);
+                        StartCoroutine(WaitOnPursuit());
                     }
                 }
                 else
@@ -58,42 +73,22 @@ namespace SoulsLike
               
             }
 
+            Vector3 toBase = mOriginalPosition - transform.position;
+            toBase.y = 0;
+
+            mAnimator.SetBool(HashNearBase, toBase.magnitude < 0.01f);
 
 
         }
 
-        private PlayerKontrol LookForPlayer()
+        private IEnumerator WaitOnPursuit()
         {
-
-            if (PlayerKontrol.Instance == null)
-            {
-                return null;
-            }
-
-            //aralarýndaki mesafe için
-            Vector3 enemyPosition = transform.position;
-            Vector3 toPlayer = PlayerKontrol.Instance.transform.position - enemyPosition;
-            toPlayer.y = 0;
-
-            if (toPlayer.magnitude <= detectionRadius)
-            {
-                //Debug.Log("Detecting the player!");
-
-                if (Vector3.Dot(toPlayer.normalized, transform.forward) >
-                   Mathf.Cos(detectionAngle * 0.5f * Mathf.Deg2Rad))
-                {
-                    Debug.Log("Player Has been detected!!!!");
-                    return PlayerKontrol.Instance;
-                }
-            }
-            /*else
-            {
-               // Debug.Log("Where are you?");
-                
-            }
-            */
-            return null;
+            yield return new WaitForSeconds(timeToWaitOnPursuit);
+            //mNavMeshAgent.isStopped = false;
+            mEnemyKontrol.SetFollowTarget(mOriginalPosition);
         }
+
+      
 
 
 #if UNITY_EDITOR
@@ -104,9 +99,9 @@ namespace SoulsLike
             Color c = new Color(0.8f, 0, 0, 0.4f);
             UnityEditor.Handles.color = c;
 
-            Vector3 rotatedForward = Quaternion.Euler(0,-detectionAngle * 0.5f,0) * transform.forward;
+            Vector3 rotatedForward = Quaternion.Euler(0,-playerScanner.detectionAngle * 0.5f,0) * transform.forward;
 
-            UnityEditor.Handles.DrawSolidArc(transform.position,Vector3.up,rotatedForward,detectionAngle, detectionRadius);
+            UnityEditor.Handles.DrawSolidArc(transform.position,Vector3.up,rotatedForward,playerScanner.detectionAngle, playerScanner.detectionRadius);
 
         }
 #endif
