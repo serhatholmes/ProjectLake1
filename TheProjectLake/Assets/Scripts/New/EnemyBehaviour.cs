@@ -10,9 +10,11 @@ namespace SoulsLike
     {
         public float detectionRadius = 8.0f;
         public float detectionAngle = 140.0f;
+        public float timeToStopPursuit = 2.0f;
 
         private PlayerKontrol mTarget;
         private NavMeshAgent mNavMestAgent;
+        private float mTimeSinceLostTarget = 0;
 
         private void Awake()
         {
@@ -22,13 +24,41 @@ namespace SoulsLike
         {
             //Debug.Log(PlayerKontrol.Instance);
             LookForPlayer();
-            mTarget = LookForPlayer();
+            var target = LookForPlayer();
 
-            if (!mTarget) { return; }
+            //if (!mTarget) { return; }
+            if(mTarget==null)
+            {
+                if(target != null)
+                {
+                    mTarget = target;
+                }
+            }
+            else
 
-            Vector3 targetPosition = mTarget.transform.position;
-            //Debug.Log(targetPosition);
-            mNavMestAgent.SetDestination(targetPosition);
+            {
+                mNavMestAgent.SetDestination(mTarget.transform.position);
+
+                if (target == null)
+                {
+                    mTimeSinceLostTarget += Time.deltaTime;
+                    if(mTimeSinceLostTarget >= timeToStopPursuit)
+                    {
+                        mTarget = null;
+                        Debug.Log("stopping the enemy!");
+                    }
+                }
+                else
+                {
+                    mTimeSinceLostTarget = 0;
+                }
+
+                //Vector3 targetPosition = mTarget.transform.position;
+                //Debug.Log(targetPosition);
+              
+            }
+
+
 
         }
 
