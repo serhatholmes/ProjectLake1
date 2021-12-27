@@ -8,6 +8,14 @@ namespace SoulsLike
 
     public class PlayerKontrol : MonoBehaviour
     {
+        public static PlayerKontrol Instance
+        {
+            get
+            {
+                return sInstance;
+            }
+        }
+
         const float kAcceleration = 20f;
         const float kDeceleration = 200f;
 
@@ -22,7 +30,7 @@ namespace SoulsLike
         private PlayerInput mPlayerInput;
         private CharacterController chCont;
         private Vector3 mMovement;
-        
+        private static PlayerKontrol sInstance;
         
         private CameraController mainCamController;
         private Animator mAnimator;
@@ -43,6 +51,7 @@ namespace SoulsLike
             mAnimator = GetComponent<Animator>();
             mainCamController = Camera.main.GetComponent<CameraController>();
 
+            sInstance = this;
         }
 
     
