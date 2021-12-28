@@ -19,17 +19,29 @@ public class EnemyKontrol : MonoBehaviour
 
     private void OnAnimatorMove()
     {
-        if(mNavMeshAgent == null)
+        if(mNavMeshAgent.enabled)
         {
-            return;
+            mNavMeshAgent.speed = (mAnimator.deltaPosition / Time.fixedDeltaTime).magnitude * mSpeedModifier;
         }
 
-        mNavMeshAgent.speed = (mAnimator.deltaPosition / Time.fixedDeltaTime).magnitude * mSpeedModifier;
+       
     }
 
-    public bool SetFollowTarget(Vector3 position)
+    public bool FollowTarget(Vector3 position)
     {
+        if(!mNavMeshAgent.enabled)
+        {
+            mNavMeshAgent.enabled = true;
+        }
+
         return mNavMeshAgent.SetDestination(position);
+    }
+
+    public void StopFollowTarget()
+    {
+
+
+        mNavMeshAgent.enabled = false;
     }
 
 }

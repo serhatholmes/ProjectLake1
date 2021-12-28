@@ -13,6 +13,7 @@ namespace SoulsLike
 
         public float timeToStopPursuit = 2.0f;
         public float timeToWaitOnPursuit = 2.0f;
+        public float attackDistance = 1.3f;
 
         private PlayerKontrol mTarget;
         private EnemyKontrol mEnemyKontrol;
@@ -24,6 +25,7 @@ namespace SoulsLike
 
         private readonly int HashInPursuit = Animator.StringToHash("InPursuit");
         private readonly int HashNearBase = Animator.StringToHash("NearBase");
+        private readonly int HashAttack = Animator.StringToHash("Attack");
 
         private void Awake()
         {
@@ -48,8 +50,24 @@ namespace SoulsLike
             else
 
             {
-                mEnemyKontrol.SetFollowTarget(mTarget.transform.position);
-                mAnimator.SetBool(HashInPursuit, true);
+               // mEnemyKontrol.SetFollowTarget(mTarget.transform.position);
+                //mAnimator.SetBool(HashInPursuit, true);
+
+                Vector3 toTarget = mTarget.transform.position - transform.position;
+                if(toTarget.magnitude <= attackDistance)
+                {
+                    //Debug.Log("Attack!");
+                    mEnemyKontrol.StopFollowTarget();
+                    
+
+                    mAnimator.SetTrigger(HashAttack);
+                }
+                else
+                {
+                    mAnimator.SetBool(HashInPursuit, true);
+                    mEnemyKontrol.FollowTarget(mTarget.transform.position);
+
+                }
 
                 if (target == null)
                 {
@@ -85,7 +103,7 @@ namespace SoulsLike
         {
             yield return new WaitForSeconds(timeToWaitOnPursuit);
             //mNavMeshAgent.isStopped = false;
-            mEnemyKontrol.SetFollowTarget(mOriginalPosition);
+            mEnemyKontrol.FollowTarget(mOriginalPosition);
         }
 
       
