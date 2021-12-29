@@ -3245,6 +3245,7 @@ GameObject:
   - component: {fileID: 1668187432789187}
   - component: {fileID: 1801126763}
   - component: {fileID: 1374674046}
+  - component: {fileID: 616980907}
   m_Layer: 0
   m_Name: Enemy2
   m_TagString: Untagged
@@ -3350,6 +3351,7 @@ MonoBehaviour:
     detectionAngle: 190
   timeToStopPursuit: 1
   timeToWaitOnPursuit: 1
+  attackDistance: 1.3
 --- !u!195 &1801126763
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3364,7 +3366,7 @@ NavMeshAgent:
   m_Acceleration: 720
   avoidancePriority: 50
   m_AngularSpeed: 720
-  m_StoppingDistance: 1.3
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -3384,6 +3386,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeacc711b94a797498967c7ed35a52ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &616980907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367818856967338683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f51bfb2173a634a98f4767acd45204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHitPoints: 150
 --- !u!1 &1367826285338429223
 GameObject:
   m_ObjectHideFlags: 0

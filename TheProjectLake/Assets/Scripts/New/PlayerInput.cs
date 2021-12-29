@@ -8,6 +8,7 @@ namespace SoulsLike
     {
 
         private Vector3 mMovement;
+        private bool mIsAttack;
 
         public Vector3 MoveInput
         {
@@ -25,9 +26,31 @@ namespace SoulsLike
             }
         }
 
+        public bool IsAttack
+        {
+            get
+            {
+                return mIsAttack;
+            }
+        }
+
         void Update()
         {
+
             mMovement.Set(Input.GetAxis("Horizontal"),0,Input.GetAxis("Vertical"));
+       
+            if(Input.GetButtonDown("Fire1") && mIsAttack==false)
+            {
+                // Debug.Log("attacking");
+                StartCoroutine(AttackAndWait());
+            }
+        }
+
+        private IEnumerator AttackAndWait()
+        {
+            mIsAttack = true;
+            yield return new WaitForSeconds(0.03f);
+            mIsAttack = false;
         }
     }
 

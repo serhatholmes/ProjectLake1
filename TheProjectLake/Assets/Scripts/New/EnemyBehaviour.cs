@@ -21,6 +21,7 @@ namespace SoulsLike
         //private NavMeshAgent mNavMeshAgent;
         private float mTimeSinceLostTarget = 0;
         private Vector3 mOriginalPosition;
+        private Quaternion mOriginalRotation;
         private Animator mAnimator;
 
         private readonly int HashInPursuit = Animator.StringToHash("InPursuit");
@@ -32,6 +33,7 @@ namespace SoulsLike
             mEnemyKontrol = GetComponent<EnemyKontrol>();
             mOriginalPosition = transform.position;
             mAnimator = GetComponent<Animator>();
+            mOriginalRotation = transform.rotation;
         }
         private void Update()
         {
@@ -94,8 +96,16 @@ namespace SoulsLike
             Vector3 toBase = mOriginalPosition - transform.position;
             toBase.y = 0;
 
-            mAnimator.SetBool(HashNearBase, toBase.magnitude < 0.01f);
+            bool nearBase = toBase.magnitude < 0.01f;
 
+            mAnimator.SetBool(HashNearBase, nearBase);
+
+            if(nearBase)
+            {
+                Quaternion targetRotation = Quaternion.RotateTowards(transform.rotation, mOriginalRotation, 360 * Time.deltaTime);
+
+                transform.rotation = targetRotation;
+            }
 
         }
 

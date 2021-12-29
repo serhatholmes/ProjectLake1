@@ -36,6 +36,7 @@ namespace SoulsLike
         private Animator mAnimator;
 
         private readonly int HashForwardSpeed = Animator.StringToHash("ForwardSpeed");
+        private readonly int HashMeleeAttack = Animator.StringToHash("MeleeAttack");
 
         private Quaternion mTargetRotation;
 
@@ -72,6 +73,14 @@ namespace SoulsLike
 
                 transform.rotation = mTargetRotation;
 
+            }
+
+            mAnimator.ResetTrigger(HashMeleeAttack);
+
+            if(mPlayerInput.IsAttack)
+            {
+                //Debug.Log("is attacking");
+                mAnimator.SetTrigger(HashMeleeAttack);
             }
             /* float horizontalInput = Input.GetAxis("Horizontal");
              float verticalInput = Input.GetAxis("Vertical");
