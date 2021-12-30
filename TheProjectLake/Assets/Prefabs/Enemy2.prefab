@@ -3349,7 +3349,7 @@ MonoBehaviour:
   playerScanner:
     detectionRadius: 8
     detectionAngle: 190
-  timeToStopPursuit: 1
+  timeToStopPursuit: 3
   timeToWaitOnPursuit: 1
   attackDistance: 1.3
 --- !u!195 &1801126763

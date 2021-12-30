@@ -15,7 +15,15 @@ namespace SoulsLike
         public float timeToWaitOnPursuit = 2.0f;
         public float attackDistance = 1.3f;
 
-        private PlayerKontrol mTarget;
+        public bool HasFollowingTarget
+        {
+            get
+            {
+                return mFollowTarget != null;
+            }
+        } 
+
+        private PlayerKontrol mFollowTarget;
         private EnemyKontrol mEnemyKontrol;
 
         //private NavMeshAgent mNavMeshAgent;
@@ -39,60 +47,66 @@ namespace SoulsLike
         {
             //Debug.Log(PlayerKontrol.Instance);
             //LookForPlayer();
-            var target = playerScanner.Detect(transform);
+            var detectedTarget = playerScanner.Detect(transform);
+            bool hasDetectedTarget = detectedTarget != null;
 
-            //if (!mTarget) { return; }
-            if(mTarget==null)
+            if(hasDetectedTarget)
             {
-                if(target != null)
-                {
-                    mTarget = target;
-                }
+                mFollowTarget = detectedTarget;
             }
-            else
 
+            if(HasFollowingTarget)
             {
-               // mEnemyKontrol.SetFollowTarget(mTarget.transform.position);
-                //mAnimator.SetBool(HashInPursuit, true);
+                AttackFollowTarget();
 
-                Vector3 toTarget = mTarget.transform.position - transform.position;
-                if(toTarget.magnitude <= attackDistance)
-                {
-                    //Debug.Log("Attack!");
-                    mEnemyKontrol.StopFollowTarget();
-                    
-
-                    mAnimator.SetTrigger(HashAttack);
-                }
-                else
-                {
-                    mAnimator.SetBool(HashInPursuit, true);
-                    mEnemyKontrol.FollowTarget(mTarget.transform.position);
-
-                }
-
-                if (target == null)
-                {
-                    mTimeSinceLostTarget += Time.deltaTime;
-                    if(mTimeSinceLostTarget >= timeToStopPursuit)
-                    {
-                        mTarget = null;
-                        //Debug.Log("stopping the enemy!");
-                        //mNavMeshAgent.isStopped = true;
-                        mAnimator.SetBool("InPursuit", false);
-                        StartCoroutine(WaitOnPursuit());
-                    }
-                }
-                else
+                if(hasDetectedTarget)
                 {
                     mTimeSinceLostTarget = 0;
                 }
-
-                //Vector3 targetPosition = mTarget.transform.position;
-                //Debug.Log(targetPosition);
-              
+                else
+                {
+                    StopPursuit();
+                }
             }
 
+            CheckIfNearBase();
+
+        }
+
+        private void AttackFollowTarget()
+        {
+            Vector3 toTarget = mFollowTarget.transform.position - transform.position;
+            if (toTarget.magnitude <= attackDistance)
+            {
+                //Debug.Log("Attack!");
+                mEnemyKontrol.StopFollowTarget();
+
+
+                mAnimator.SetTrigger(HashAttack);
+            }
+            else
+            {
+                mAnimator.SetBool(HashInPursuit, true);
+                mEnemyKontrol.FollowTarget(mFollowTarget.transform.position);
+
+            }
+        }
+
+        private void StopPursuit()
+        {
+            mTimeSinceLostTarget += Time.deltaTime;
+            if (mTimeSinceLostTarget >= timeToStopPursuit)
+            {
+                mFollowTarget = null;
+                //Debug.Log("stopping the enemy!");
+                //mNavMeshAgent.isStopped = true;
+                mAnimator.SetBool("InPursuit", false);
+                StartCoroutine(WaitOnPursuit());
+            }
+        }
+
+        private void CheckIfNearBase()
+        {
             Vector3 toBase = mOriginalPosition - transform.position;
             toBase.y = 0;
 
@@ -100,13 +114,12 @@ namespace SoulsLike
 
             mAnimator.SetBool(HashNearBase, nearBase);
 
-            if(nearBase)
+            if (nearBase)
             {
                 Quaternion targetRotation = Quaternion.RotateTowards(transform.rotation, mOriginalRotation, 360 * Time.deltaTime);
 
                 transform.rotation = targetRotation;
             }
-
         }
 
         private IEnumerator WaitOnPursuit()
