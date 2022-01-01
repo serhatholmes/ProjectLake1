@@ -14,10 +14,12 @@ public class SceneManagement : MonoBehaviour
 
     public Texture2D cursorArrow;
 
+    public GameObject Button;
+
     public void PlayGame()
     {
-       
-        SceneManager.LoadSceneAsync("Game");
+        StartCoroutine(WaitForPlay());
+       // SceneManager.LoadScene("Game");
         
        
     }
@@ -38,10 +40,20 @@ public class SceneManagement : MonoBehaviour
         Cursor.SetCursor(cursorArrow, Vector2.zero, CursorMode.ForceSoftware);
     }
 
+    public void ShowStory()
+    {
+        SceneManager.LoadScene("Story");
+    }
+
     public void GameOver()
     {
         SceneManager.LoadScene("GameOver");
         Cursor.SetCursor(cursorArrow, Vector2.zero, CursorMode.ForceSoftware);
+    }
+
+    public void HideButton()
+    {
+        StartCoroutine(WaitForHide());
     }
 
     public void ExitGame()
@@ -61,6 +73,21 @@ public class SceneManagement : MonoBehaviour
         
 
     }
+
+    public IEnumerator WaitForHide()
+    {
+        
+        yield return new WaitForSeconds(0.4f);
+        Button.SetActive(false);
+    }
+
+    public IEnumerator WaitForPlay()
+    {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("Game");
+    }
+
+
 
     public void Pause()
     {
