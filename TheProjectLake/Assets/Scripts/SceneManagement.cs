@@ -18,8 +18,8 @@ public class SceneManagement : MonoBehaviour
 
     public void PlayGame()
     {
-        StartCoroutine(WaitForPlay());
-       // SceneManager.LoadScene("Game");
+        
+       SceneManager.LoadScene("Game");
         
        
     }
