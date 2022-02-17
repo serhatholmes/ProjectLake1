@@ -16,6 +16,7 @@ namespace SoulsLike
             }
         }
 
+        public MeleeWeapons meleeWeapon;
         const float kAcceleration = 20f;
         const float kDeceleration = 200f;
 
@@ -81,6 +82,7 @@ namespace SoulsLike
             {
                 //Debug.Log("is attacking");
                 mAnimator.SetTrigger(HashMeleeAttack);
+                meleeWeapon.AttackBegin();
             }
             /* float horizontalInput = Input.GetAxis("Horizontal");
              float verticalInput = Input.GetAxis("Vertical");

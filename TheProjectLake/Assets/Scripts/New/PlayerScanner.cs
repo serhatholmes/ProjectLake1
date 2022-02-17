@@ -6,6 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerScanner 
 {
+    public float meleeDetectionRadius = 2.0f;
     public float detectionRadius = 8.0f;
     public float detectionAngle = 140.0f;
 
@@ -26,8 +27,8 @@ public class PlayerScanner
         {
             //Debug.Log("Detecting the player!");
 
-            if (Vector3.Dot(toPlayer.normalized, detector.forward) >
-               Mathf.Cos(detectionAngle * 0.5f * Mathf.Deg2Rad))
+            if ((Vector3.Dot(toPlayer.normalized, detector.forward) >
+               Mathf.Cos(detectionAngle * 0.5f * Mathf.Deg2Rad)) || toPlayer.magnitude <= meleeDetectionRadius)
             {
                 Debug.Log("Player Has been detected!!!!");
                 return PlayerKontrol.Instance;
