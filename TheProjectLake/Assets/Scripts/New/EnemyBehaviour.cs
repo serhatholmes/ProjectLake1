@@ -45,21 +45,29 @@ namespace SoulsLike
         }
         private void Update()
         {
+
+            GuardPosition();
+          
+
+        }
+
+        private void GuardPosition()
+        {
             //Debug.Log(PlayerKontrol.Instance);
             //LookForPlayer();
             var detectedTarget = playerScanner.Detect(transform);
             bool hasDetectedTarget = detectedTarget != null;
 
-            if(hasDetectedTarget)
+            if (hasDetectedTarget)
             {
                 mFollowTarget = detectedTarget;
             }
 
-            if(HasFollowingTarget)
+            if (HasFollowingTarget)
             {
                 AttackFollowTarget();
 
-                if(hasDetectedTarget)
+                if (hasDetectedTarget)
                 {
                     mTimeSinceLostTarget = 0;
                 }
@@ -70,7 +78,6 @@ namespace SoulsLike
             }
 
             CheckIfNearBase();
-
         }
 
         private void AttackFollowTarget()
@@ -78,16 +85,11 @@ namespace SoulsLike
             Vector3 toTarget = mFollowTarget.transform.position - transform.position;
             if (toTarget.magnitude <= attackDistance)
             {
-                //Debug.Log("Attack!");
-                mEnemyKontrol.StopFollowTarget();
-
-
-                mAnimator.SetTrigger(HashAttack);
+                AttackTarget(toTarget);
             }
             else
             {
-                mAnimator.SetBool(HashInPursuit, true);
-                mEnemyKontrol.FollowTarget(mFollowTarget.transform.position);
+                FollowTarget();
 
             }
         }
@@ -101,8 +103,32 @@ namespace SoulsLike
                 //Debug.Log("stopping the enemy!");
                 //mNavMeshAgent.isStopped = true;
                 mAnimator.SetBool("InPursuit", false);
-                StartCoroutine(WaitOnPursuit());
+                StartCoroutine(WaitBeforeReturn());
             }
+        }
+
+
+        private void AttackTarget(Vector3 toTarget)
+        {
+            var toTargetRotation = Quaternion.LookRotation(toTarget);
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation,
+                toTargetRotation,
+                180 * Time.deltaTime
+                );
+            //Debug.Log("Attack!");
+            mEnemyKontrol.StopFollowTarget();
+
+
+            mAnimator.SetTrigger(HashAttack);
+        }
+
+        private void FollowTarget()
+        {
+
+            mAnimator.SetBool(HashInPursuit, true);
+            mEnemyKontrol.FollowTarget(mFollowTarget.transform.position);
+
         }
 
         private void CheckIfNearBase()
@@ -122,7 +148,7 @@ namespace SoulsLike
             }
         }
 
-        private IEnumerator WaitOnPursuit()
+        private IEnumerator WaitBeforeReturn()
         {
             yield return new WaitForSeconds(timeToWaitOnPursuit);
             //mNavMeshAgent.isStopped = false;

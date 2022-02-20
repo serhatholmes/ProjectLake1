@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5914819542418411169}
   - component: {fileID: 5914819542417608321}
   - component: {fileID: 5914819542416510017}
-  - component: {fileID: 6471223689125512024}
   - component: {fileID: 2692617048222368946}
+  - component: {fileID: 1753368717}
   m_Layer: 0
   m_Name: Sword_1
   m_TagString: Untagged
@@ -83,19 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6471223689125512024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5914819542418510465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c148a736ae5a88c4d9cba23a9b41e304, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
 --- !u!114 &2692617048222368946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,3 +96,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toFollow: {fileID: 0}
+--- !u!114 &1753368717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5914819542418510465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c148a736ae5a88c4d9cba23a9b41e304, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  attackPoints:
+  - radius: 0.08
+    offset: {x: -0.23, y: 0.1, z: 0.86}
+    rootTransform: {fileID: 5914819542418411169}
+  - radius: 0.08
+    offset: {x: -0.2, y: 0.08, z: 0.72}
+    rootTransform: {fileID: 5914819542418411169}

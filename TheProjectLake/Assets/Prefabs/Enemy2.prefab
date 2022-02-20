@@ -3347,6 +3347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScanner:
+    meleeDetectionRadius: 2
     detectionRadius: 8
     detectionAngle: 190
   timeToStopPursuit: 3
