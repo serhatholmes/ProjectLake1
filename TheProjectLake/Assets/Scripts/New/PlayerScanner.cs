@@ -30,7 +30,7 @@ public class PlayerScanner
             if ((Vector3.Dot(toPlayer.normalized, detector.forward) >
                Mathf.Cos(detectionAngle * 0.5f * Mathf.Deg2Rad)) || toPlayer.magnitude <= meleeDetectionRadius)
             {
-                Debug.Log("Player Has been detected!!!!");
+                //Debug.Log("Player Has been detected!!!!");
                 return PlayerKontrol.Instance;
             }
         }

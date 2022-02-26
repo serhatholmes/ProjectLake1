@@ -82,7 +82,7 @@ namespace SoulsLike
             {
                 //Debug.Log("is attacking");
                 mAnimator.SetTrigger(HashMeleeAttack);
-                meleeWeapon.AttackBegin();
+                
             }
             /* float horizontalInput = Input.GetAxis("Horizontal");
              float verticalInput = Input.GetAxis("Vertical");
@@ -106,6 +106,17 @@ namespace SoulsLike
             //chCont.transform.rotation = Quaternion.Euler(0, camRotation.eulerAngles.y, 0);
             //rb.MoveRotation(rotation);
 
+        }
+
+        public void MeleeAttackStart()
+        {
+            
+            meleeWeapon.AttackBegin();
+        }
+
+        public void MeleeAttackEnd()
+        {
+            meleeWeapon.AttackEnd();
         }
 
         private void ComputeVerticalMovement()

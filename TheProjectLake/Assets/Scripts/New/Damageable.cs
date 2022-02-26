@@ -2,9 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Damageable : MonoBehaviour
+namespace SoulsLike
 {
-    public int maxHitPoints;
+    public partial class Damageable : MonoBehaviour
+    {
+        public int maxHitPoints;
 
 
+        public void ApplyDamage()
+        {
+            //Debug.Log("Applying damage!");
+        }
+    }
 }
+
