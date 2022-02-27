@@ -24,6 +24,7 @@ namespace SoulsLike
         private bool IsAttack = false;
         private Vector3[] originalAttackPos;
         private RaycastHit[] mRayCastHitCache = new RaycastHit[32];
+        private GameObject mOwner;
 
 
         private void FixedUpdate()
@@ -75,9 +76,17 @@ namespace SoulsLike
             {
 
                 Damageable.DamageMessage data;
-                damageable.ApplyDamage();
+                data.amount = damage;
+                data.damager = this;
+                data.damageSource = mOwner.transform.position;
+                damageable.ApplyDamage(data);
             }
 
+        }
+
+        public void SetOwner(GameObject owner)
+        {
+            mOwner = owner;
         }
 
 

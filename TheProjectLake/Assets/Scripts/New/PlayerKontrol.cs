@@ -54,6 +54,8 @@ namespace SoulsLike
             mainCamController = Camera.main.GetComponent<CameraController>();
 
             sInstance = this;
+
+            meleeWeapon.SetOwner(gameObject);
         }
 
     

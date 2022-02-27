@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 namespace SoulsLike
 {
-    public class EnemyBehaviour : MonoBehaviour
+    public class EnemyBehaviour : MonoBehaviour, iMessageReceiver
     {
 
         public PlayerScanner playerScanner;
@@ -30,17 +30,18 @@ namespace SoulsLike
         private float mTimeSinceLostTarget = 0;
         private Vector3 mOriginalPosition;
         private Quaternion mOriginalRotation;
-        private Animator mAnimator;
+        
 
         private readonly int HashInPursuit = Animator.StringToHash("InPursuit");
         private readonly int HashNearBase = Animator.StringToHash("NearBase");
         private readonly int HashAttack = Animator.StringToHash("Attack");
+        private readonly int HashHurt = Animator.StringToHash("Hurt");
 
         private void Awake()
         {
             mEnemyKontrol = GetComponent<EnemyKontrol>();
             mOriginalPosition = transform.position;
-            mAnimator = GetComponent<Animator>();
+           
             mOriginalRotation = transform.rotation;
         }
         private void Update()
@@ -94,6 +95,27 @@ namespace SoulsLike
             }
         }
 
+        public void OnReceiveMessage(MessageType type)
+        {
+           switch(type)
+            {
+                case MessageType.DEAD:
+                    Debug.Log("dead anim");
+                    break;
+                case MessageType.DAMAGED:
+                    OnReceiveDamage();
+                    break;
+                default:
+                    break;
+
+            }
+        }
+
+        private void OnReceiveDamage()
+        {
+            mEnemyKontrol.Animator.SetTrigger(HashHurt);
+        }
+
         private void StopPursuit()
         {
             mTimeSinceLostTarget += Time.deltaTime;
@@ -102,7 +124,7 @@ namespace SoulsLike
                 mFollowTarget = null;
                 //Debug.Log("stopping the enemy!");
                 //mNavMeshAgent.isStopped = true;
-                mAnimator.SetBool("InPursuit", false);
+                mEnemyKontrol.Animator.SetBool("InPursuit", false);
                 StartCoroutine(WaitBeforeReturn());
             }
         }
@@ -120,13 +142,13 @@ namespace SoulsLike
             mEnemyKontrol.StopFollowTarget();
 
 
-            mAnimator.SetTrigger(HashAttack);
+            mEnemyKontrol.Animator.SetTrigger(HashAttack);
         }
 
         private void FollowTarget()
         {
 
-            mAnimator.SetBool(HashInPursuit, true);
+            mEnemyKontrol.Animator.SetBool(HashInPursuit, true);
             mEnemyKontrol.FollowTarget(mFollowTarget.transform.position);
 
         }
@@ -138,7 +160,7 @@ namespace SoulsLike
 
             bool nearBase = toBase.magnitude < 0.01f;
 
-            mAnimator.SetBool(HashNearBase, nearBase);
+            mEnemyKontrol.Animator.SetBool(HashNearBase, nearBase);
 
             if (nearBase)
             {

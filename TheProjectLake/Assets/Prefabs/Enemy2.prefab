@@ -3350,7 +3350,7 @@ MonoBehaviour:
   playerScanner:
     meleeDetectionRadius: 2
     detectionRadius: 8
-    detectionAngle: 190
+    detectionAngle: 200
   timeToStopPursuit: 3
   timeToWaitOnPursuit: 1
   attackDistance: 1.3
@@ -3400,7 +3400,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f51bfb2173a634a98f4767acd45204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitAngle: 356
   maxHitPoints: 150
+  onDamageMessageReceivers:
+  - {fileID: 1668187432789187}
 --- !u!136 &1368695395823640187
 CapsuleCollider:
   m_ObjectHideFlags: 0
