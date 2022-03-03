@@ -3247,6 +3247,7 @@ GameObject:
   - component: {fileID: 1374674046}
   - component: {fileID: 616980907}
   - component: {fileID: 1368695395823640187}
+  - component: {fileID: 421503386}
   m_Layer: 6
   m_Name: Enemy2
   m_TagString: Untagged
@@ -3401,7 +3402,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitAngle: 356
-  maxHitPoints: 150
+  invulnerabilityTime: 2
+  maxHitPoints: 30
   onDamageMessageReceivers:
   - {fileID: 1668187432789187}
 --- !u!136 &1368695395823640187
@@ -3418,6 +3420,19 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!114 &421503386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367818856967338683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 204e6ce3dfcd51b4bb6fdae8a5535498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ragdollPrefab: {fileID: 328679837998248638, guid: d76996b8e11f3e4428208d03857c22f6, type: 3}
 --- !u!1 &1367826285338429223
 GameObject:
   m_ObjectHideFlags: 0

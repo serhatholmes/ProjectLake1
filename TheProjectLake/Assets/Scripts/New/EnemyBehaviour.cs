@@ -36,6 +36,7 @@ namespace SoulsLike
         private readonly int HashNearBase = Animator.StringToHash("NearBase");
         private readonly int HashAttack = Animator.StringToHash("Attack");
         private readonly int HashHurt = Animator.StringToHash("Hurt");
+        private readonly int HashDead = Animator.StringToHash("Dead");
 
         private void Awake()
         {
@@ -100,7 +101,7 @@ namespace SoulsLike
            switch(type)
             {
                 case MessageType.DEAD:
-                    Debug.Log("dead anim");
+                    OnDead();
                     break;
                 case MessageType.DAMAGED:
                     OnReceiveDamage();
@@ -109,6 +110,12 @@ namespace SoulsLike
                     break;
 
             }
+        }
+
+        private void OnDead()
+        {
+            mEnemyKontrol.StopFollowTarget();
+            mEnemyKontrol.Animator.SetTrigger(HashDead);
         }
 
         private void OnReceiveDamage()
