@@ -1,0 +1,30 @@
+[
+    {
+        "uid": "q-1",
+        "title": "A New Hope",
+        "descript": "deafeat three enemies located camp",
+        "exp": 200,
+        "gold": 10,
+        "amount": 3,
+        "targets": ["b-1"],
+        "talkTo": null,
+        "explore": null,
+        "questOwnr": "qg-1",
+        "questTip": 0
+
+    },
+    {
+        "uid": "q-2",
+        "title": "Return of the Boss!",
+        "descript": "deafeat the main boss",
+        "exp": 500,
+        "gold": 30,
+        "amount": 1,
+        "targets": ["b-2"],
+        "talkTo": null,
+        "explore": null,
+        "questOwnr": "qg-2",
+        "questTip": 0
+
+    }
+]
