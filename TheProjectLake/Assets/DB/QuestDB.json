@@ -1,0 +1,31 @@
+[
+    {
+        "uid": "q-1",
+        "title": "A New Hope",
+        "description": "Defeat the enemies!",
+        "experience": 200,
+        "gold": 10,
+        "amount": 3,
+        "targets": ["b-1"],
+        "talkTo": null,
+        "explore": null,
+        "questGiver": "qg-1",
+        "type": 0
+    },
+
+    {
+        "uid": "q-2",
+        "title": "Return of the Boss",
+        "description": "Defeat the boss!",
+        "experience": 500,
+        "gold": 20,
+        "amount": 1,
+        "targets": ["b-2"],
+        "talkTo": null,
+        "explore": null,
+        "questGiver": "qg-2",
+        "type": 0
+    }
+
+
+]
