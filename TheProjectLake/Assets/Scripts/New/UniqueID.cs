@@ -1,7 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class UniqueID : MonoBehaviour
-{
+namespace SoulsLike{
+    public class UniqueID : MonoBehaviour
+    {
+
+        [SerializeField]
+        private string uid = Guid.NewGuid().ToString();
+        
+        public string Uid { get { return uid; }}
+    }
+
 }

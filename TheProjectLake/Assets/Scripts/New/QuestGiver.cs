@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace SoulsLike{
 public class QuestGiver : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Quest quest;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 }
+
+
+}
+

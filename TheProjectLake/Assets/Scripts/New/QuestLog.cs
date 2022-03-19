@@ -2,17 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestLog : MonoBehaviour
+
+namespace SoulsLike
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum QuestStatus
     {
+        ACTIVE,
+        FAILED,
+        COMPLETED
+    }
+    public class AcceptedQuest: Quest 
+    {
+        public QuestStatus questStatus;
         
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public class QuestLog : MonoBehaviour
     {
-        
+        public List<AcceptedQuest> quests;
+
     }
 }
+

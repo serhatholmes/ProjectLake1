@@ -2169,6 +2169,7 @@ GameObject:
   - component: {fileID: 1253087608536266}
   - component: {fileID: 1253087608536264}
   - component: {fileID: 4942847026553567634}
+  - component: {fileID: 1544369197}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -2323,6 +2324,18 @@ MonoBehaviour:
   invulnerabilityTime: 0.5
   maxHitPoints: 200
   onDamageMessageReceivers: []
+--- !u!114 &1544369197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4944097536082527575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7a99f34fda6e654983938066a4f7814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4944112110865129773
 GameObject:
   m_ObjectHideFlags: 0

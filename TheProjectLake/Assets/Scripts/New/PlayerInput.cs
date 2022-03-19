@@ -7,8 +7,10 @@ namespace SoulsLike
     public class PlayerInput : MonoBehaviour
     {
 
+        public float distanceToInteractWithNpc= 2.4f;
         private Vector3 mMovement;
         private bool mIsAttack;
+        public bool mIsTalk;
 
         public Vector3 MoveInput
         {
@@ -34,16 +36,59 @@ namespace SoulsLike
             }
         }
 
+        public bool isTalk
+        {
+            get
+            {
+                return mIsTalk;
+            }
+        }
+
         void Update()
         {
 
             mMovement.Set(Input.GetAxis("Horizontal"),0,Input.GetAxis("Vertical"));
        
-            if(Input.GetButtonDown("Fire1") && mIsAttack==false)
+            bool isLeftMouseClick = Input.GetMouseButtonDown(0);
+            bool isRightMouseClick = Input.GetMouseButtonDown(1);
+
+            if(isLeftMouseClick)
             {
-                // Debug.Log("attacking");
-                StartCoroutine(AttackAndWait());
+                
+                HandleLeftMouseBtnDown();
             }
+
+            if(isRightMouseClick)
+            {
+                HandleRightMouseBtnDown();
+            }
+        }
+
+        private void HandleLeftMouseBtnDown()
+        {
+            // Debug.Log("attacking");
+                if(!mIsAttack)
+                {
+                    StartCoroutine(AttackAndWait());
+                }
+        }
+
+        private void HandleRightMouseBtnDown()
+        {
+             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                
+                bool hasHit = Physics.Raycast(ray, out RaycastHit hit);
+
+                if(hasHit && hit.collider.CompareTag("QuestGiver"))
+                {
+                    var distanceToTarget = (transform.position - hit.transform.position).magnitude;
+                    //var distance = Vector3.Distance(transform.position, hit.transform.position);
+
+                    if(distanceToTarget <= distanceToInteractWithNpc)
+                    {
+                        mIsTalk=true;
+                    }
+                }
         }
 
         private IEnumerator AttackAndWait()

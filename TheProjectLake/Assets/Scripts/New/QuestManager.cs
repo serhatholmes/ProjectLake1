@@ -30,6 +30,7 @@ namespace SoulsLike
         private void Awake()
         {
             LoadQuestsFromDB();
+            AssignQuests();
         }
 
         private void LoadQuestsFromDB()
@@ -41,7 +42,37 @@ namespace SoulsLike
                 quests = new Quest[loadedQuests.Length];
                 quests = loadedQuests;
             }
+
+
         }
+
+        private void AssignQuests()
+        {
+            var questGivers = FindObjectsOfType<QuestGiver>();
+
+            if(questGivers != null && questGivers.Length >0)
+            {
+                foreach(var questGiver in questGivers)
+                 {
+
+                    AssignQuestTo(questGiver);
+                 }
+            }
+
+           
+        }
+
+        private void AssignQuestTo(QuestGiver questGiver)
+        {
+            foreach(var quest in quests)
+            {
+                if(quest.questGiver == questGiver.GetComponent<UniqueID>().Uid){
+
+                    questGiver.quest = quest;
+                }
+            }
+        }
+
     }
 
 }
