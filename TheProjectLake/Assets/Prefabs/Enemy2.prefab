@@ -3353,9 +3353,9 @@ MonoBehaviour:
     meleeDetectionRadius: 2
     detectionRadius: 8
     detectionAngle: 200
-  timeToStopPursuit: 3
+  timeToStopPursuit: 4
   timeToWaitOnPursuit: 1
-  attackDistance: 1.3
+  attackDistance: 1.4
 --- !u!195 &1801126763
 NavMeshAgent:
   m_ObjectHideFlags: 0

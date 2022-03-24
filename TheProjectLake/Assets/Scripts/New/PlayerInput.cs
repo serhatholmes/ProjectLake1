@@ -7,11 +7,17 @@ namespace SoulsLike
     public class PlayerInput : MonoBehaviour
     {
 
+        public static PlayerInput Instance { get { return mInstance; } }
         public float distanceToInteractWithNpc= 2.4f;
+
+        public static  PlayerInput mInstance;
         private Vector3 mMovement;
         private bool mIsAttack;
-        public bool mIsTalk;
 
+        private Collider mOptionClickTarget;
+        //public bool mIsTalk;
+
+        public Collider OptionClickTarget { get { return mOptionClickTarget;}}
         public Vector3 MoveInput
         {
             get
@@ -36,12 +42,9 @@ namespace SoulsLike
             }
         }
 
-        public bool isTalk
-        {
-            get
-            {
-                return mIsTalk;
-            }
+        private void Awake() {
+            
+            mInstance = this;
         }
 
         void Update()
@@ -69,7 +72,7 @@ namespace SoulsLike
             // Debug.Log("attacking");
                 if(!mIsAttack)
                 {
-                    StartCoroutine(AttackAndWait());
+                    StartCoroutine(TriggerAttack());
                 }
         }
 
@@ -79,19 +82,20 @@ namespace SoulsLike
                 
                 bool hasHit = Physics.Raycast(ray, out RaycastHit hit);
 
-                if(hasHit && hit.collider.CompareTag("QuestGiver"))
+                if(hasHit)
                 {
-                    var distanceToTarget = (transform.position - hit.transform.position).magnitude;
-                    //var distance = Vector3.Distance(transform.position, hit.transform.position);
-
-                    if(distanceToTarget <= distanceToInteractWithNpc)
-                    {
-                        mIsTalk=true;
-                    }
+                   //mOptionClickTarget = hit.collider;
+                   StartCoroutine(TriggerOptionTarget(hit.collider));
                 }
         }
 
-        private IEnumerator AttackAndWait()
+        private IEnumerator TriggerOptionTarget(Collider other)
+        {
+            mOptionClickTarget = other;
+            yield return new WaitForSeconds(0.03f);
+            mOptionClickTarget = null;
+        }
+        private IEnumerator TriggerAttack()
         {
             mIsAttack = true;
             yield return new WaitForSeconds(0.03f);

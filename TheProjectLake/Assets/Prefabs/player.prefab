@@ -2291,7 +2291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meleeWeapon: {fileID: 0}
-  maxForwardSpeed: 3.5
+  maxForwardSpeed: 4
   rotationSpeed: 8
   mMaxRotationSpeed: 1200
   mMinRotationSpeed: 800
@@ -2308,6 +2308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 822d7466ba4e67e40b0d81ddbf87027e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToInteractWithNpc: 2.4
 --- !u!114 &4942847026553567634
 MonoBehaviour:
   m_ObjectHideFlags: 0

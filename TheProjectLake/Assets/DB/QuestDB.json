@@ -5,7 +5,7 @@
         "description": "Defeat the enemies!",
         "experience": 200,
         "gold": 10,
-        "amount": 3,
+        "amount": 5,
         "targets": ["4eeca460-02ff-446a-b6d7-8fe647672932"],
         "talkTo": null,
         "explore": null,
