@@ -9,49 +9,73 @@ namespace SoulsLike
     {
         public GameObject dialogUI;
         public Text dialogHeaderText;
+        public Text dialogWelcomeText;
 
-        private bool mHasActiveDialog;
+        public float maxDialogDistance=2.4f;
 
-        private void Awake() {
-            
-            dialogUI.SetActive(false);
+        private PlayerInput mPlayer;
+        private QuestGiver mNpc;
+        private Dialog mActiveDialog;
+
+        public bool HasActiveDialog {get { return mActiveDialog != null;}}
+
+        public float DialogDistance 
+            { 
+                get {
+                     return  Vector3.Distance(
+                    mPlayer.transform.position,
+                    mNpc.transform.position);
+            }
         }
+
+        private void Start() 
+        {
+            mPlayer = PlayerInput.Instance;
+            //Debug.Log("calis");
+        }
+
+       
         private void Update() {
             
-            if(!mHasActiveDialog && PlayerInput.Instance != null && PlayerInput.Instance.OptionClickTarget != null)
+            if(!HasActiveDialog && mPlayer != null && mPlayer.OptionClickTarget != null)
             {
-                if(PlayerInput.Instance.OptionClickTarget.CompareTag("QuestGiver"))
+                Debug.Log(mPlayer.OptionClickTarget.tag);
+                if(mPlayer.OptionClickTarget.CompareTag("QuestGiver"))
                 {
-                    var distanceToTarget = Vector3.Distance(
-                    PlayerInput.Instance.transform.position,
-                    PlayerInput.Instance.OptionClickTarget.transform.position
-                    );
+                    
+                    mNpc = mPlayer.OptionClickTarget.GetComponent<QuestGiver>();
 
-                    if(distanceToTarget < 2.4f)
+                   
+
+                    if(DialogDistance < maxDialogDistance)
                     {
+                        
                         StartDialog();
                     }
                 
                 }
             }
 
-            closePanel();
+            if(HasActiveDialog && DialogDistance > maxDialogDistance + 1.0f)
+            {
+                StopDialog();
+            }
         }
 
         private void StartDialog()
         {
-            mHasActiveDialog = true;
+            mActiveDialog = mNpc.dialog;
             dialogUI.SetActive(true);
-            dialogHeaderText.text = "Hello there, protagonist! Are you new here?";
+            dialogHeaderText.text = mNpc.name;
         }
 
-        public void closePanel()
+        private void StopDialog()
         {
-           if(Input.GetButtonDown("Submit"))
-           {
-                dialogUI.SetActive(false);
-           }
-           
+            mNpc = null;
+            mActiveDialog = null;
+            dialogUI.SetActive(false);
         }
+
+        
     }
 }
