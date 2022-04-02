@@ -18,6 +18,7 @@ namespace SoulsLike
            [TextArea(3,15)]  public string text;
             public DialogAnswer answer;
             public bool isAsked;
+            public bool isAlwaysAsked;
 
         } 
     
