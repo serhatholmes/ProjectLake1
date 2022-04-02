@@ -3248,7 +3248,6 @@ GameObject:
   - component: {fileID: 616980907}
   - component: {fileID: 1368695395823640187}
   - component: {fileID: 421503386}
-  - component: {fileID: 1036138994326943685}
   m_Layer: 6
   m_Name: Enemy2
   m_TagString: Untagged
@@ -3434,19 +3433,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ragdollPrefab: {fileID: 328679837998248638, guid: d76996b8e11f3e4428208d03857c22f6, type: 3}
---- !u!114 &1036138994326943685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1367818856967338683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8b1071f51e8ba348b4f9e38d552987f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uid: 4eeca460-02ff-446a-b6d7-8fe647672932
 --- !u!1 &1367826285338429223
 GameObject:
   m_ObjectHideFlags: 0

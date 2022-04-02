@@ -13,7 +13,7 @@ namespace SoulsLike
     }
     public interface iMessageReceiver
     {
-        void OnReceiveMessage(MessageType type);
+        void OnReceiveMessage(MessageType type,object sender, object message);
 
     }
 }

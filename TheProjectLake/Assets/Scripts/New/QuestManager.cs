@@ -23,7 +23,7 @@ namespace SoulsLike
     }
 
 
-    public class QuestManager : MonoBehaviour
+    public class QuestManager : MonoBehaviour, iMessageReceiver
     {
         public Quest[] quests;
 
@@ -69,6 +69,37 @@ namespace SoulsLike
                 if(quest.questGiver == questGiver.GetComponent<UniqueID>().Uid){
 
                     questGiver.quest = quest;
+                }
+            }
+        }
+
+        public void OnReceiveMessage(MessageType type, object sender, object msg)
+        {
+            if(type == MessageType.DEAD)
+            {
+                CheckQuestWhenEnemyDead((Damageable)sender,(Damageable.DamageMessage) msg);
+            }
+        }
+
+        private void CheckQuestWhenEnemyDead(Damageable sender, Damageable.DamageMessage msg)
+        {
+            var questLog = msg.damageSource.GetComponent<QuestLog>();
+            if(questLog == null) { return; }
+
+            foreach(var quest in questLog.quests)
+            {
+                if(quest.status == QuestStatus.ACTIVE)
+                {
+                    if(quest.type == QuestType.HUNT && Array.Exists(quest.targets,
+                     (targetUid)=> sender.GetComponent<UniqueID>().Uid == targetUid))
+                    {
+                        quest.amount -= 1;
+                        if(quest.amount == 0)
+                        {
+                            quest.status = QuestStatus.COMPLETED;
+                            Debug.Log("quest done");
+                        }
+                    }
                 }
             }
         }

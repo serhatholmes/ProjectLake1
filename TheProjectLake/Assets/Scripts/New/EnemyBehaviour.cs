@@ -96,7 +96,7 @@ namespace SoulsLike
             }
         }
 
-        public void OnReceiveMessage(MessageType type)
+        public void OnReceiveMessage(MessageType type,object sender, object msg)
         {
            switch(type)
             {
@@ -188,10 +188,10 @@ namespace SoulsLike
 
 
 #if UNITY_EDITOR
-        // gizmoda karakter seçiliyken çalýþýr
+        // gizmoda karakter seï¿½iliyken ï¿½alï¿½ï¿½ï¿½r
         private void OnDrawGizmosSelected()
         {
-            // düþmanýn görüþ açýsýný görselleþtirme
+            // dï¿½ï¿½manï¿½n gï¿½rï¿½ï¿½ aï¿½ï¿½sï¿½nï¿½ gï¿½rselleï¿½tirme
             Color c = new Color(0.8f, 0, 0, 0.4f);
             UnityEditor.Handles.color = c;
 

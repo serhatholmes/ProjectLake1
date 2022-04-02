@@ -78,7 +78,8 @@ namespace SoulsLike
                 Damageable.DamageMessage data;
                 data.amount = damage;
                 data.damager = this;
-                data.damageSource = mOwner.transform.position;
+                
+                data.damageSource = mOwner;
                 damageable.ApplyDamage(data);
             }
 

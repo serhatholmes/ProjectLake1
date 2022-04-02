@@ -21,6 +21,8 @@ namespace SoulsLike
         private void Awake()
         {
             CurrentHitPoints = maxHitPoints;
+
+            onDamageMessageReceivers.Add(FindObjectOfType<QuestManager>());
         }
 
         private void Update()
@@ -49,7 +51,7 @@ namespace SoulsLike
                 return;
             }
 
-            Vector3 positionToDamager = data.damageSource - transform.position;
+            Vector3 positionToDamager = data.damageSource.transform.position - transform.position;
             positionToDamager.y = 0;
 
             if(Vector3.Angle(transform.forward,positionToDamager)>hitAngle*0.5f)
@@ -69,7 +71,7 @@ namespace SoulsLike
             for(int i=0;i<onDamageMessageReceivers.Count; i++)
             {
                 var receiver = onDamageMessageReceivers[i] as iMessageReceiver;
-                receiver.OnReceiveMessage(messageType);
+                receiver.OnReceiveMessage(messageType,this,data);
               
             }
         }

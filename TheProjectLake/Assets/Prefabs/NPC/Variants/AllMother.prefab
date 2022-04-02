@@ -1,15 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8428752043666984118
+--- !u!1001 &9171078772083889647
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7795187268358497631, guid: d6961cd8b8dde1f408b55eec89a6e6fa, type: 3}
+      propertyPath: dialog.welcomeText
+      value: Hello the chosen one, what are you looking for?
+      objectReference: {fileID: 0}
+    - target: {fileID: -7795187268358497631, guid: d6961cd8b8dde1f408b55eec89a6e6fa, type: 3}
+      propertyPath: dialog.queries.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7795187268358497631, guid: d6961cd8b8dde1f408b55eec89a6e6fa, type: 3}
+      propertyPath: dialog.queries.Array.data[0].text
+      value: I heard, I need to talk with you about the boss.
+      objectReference: {fileID: 0}
+    - target: {fileID: -7795187268358497631, guid: d6961cd8b8dde1f408b55eec89a6e6fa, type: 3}
+      propertyPath: dialog.queries.Array.data[1].text
+      value: Farewell..
+      objectReference: {fileID: 0}
+    - target: {fileID: -7795187268358497631, guid: d6961cd8b8dde1f408b55eec89a6e6fa, type: 3}
+      propertyPath: dialog.queries.Array.data[0].answer.text
+      value: Yes, you heard this right. I belive you, you can defeat him.
+      objectReference: {fileID: 0}
+    - target: {fileID: -7795187268358497631, guid: d6961cd8b8dde1f408b55eec89a6e6fa, type: 3}
+      propertyPath: dialog.queries.Array.data[1].answer.text
+      value: See you soon.
+      objectReference: {fileID: 0}
+    - target: {fileID: -7795187268358497631, guid: d6961cd8b8dde1f408b55eec89a6e6fa, type: 3}
+      propertyPath: dialog.queries.Array.data[1].isAlwaysAsked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7795187268358497631, guid: d6961cd8b8dde1f408b55eec89a6e6fa, type: 3}
+      propertyPath: dialog.queries.Array.data[1].answer.questID
+      value: q-2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7795187268358497631, guid: d6961cd8b8dde1f408b55eec89a6e6fa, type: 3}
+      propertyPath: dialog.queries.Array.data[1].answer.isForceDialogQuit
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7764892687506653992, guid: d6961cd8b8dde1f408b55eec89a6e6fa, type: 3}
       propertyPath: m_Name
-      value: TheWoman
+      value: AllMother
       objectReference: {fileID: 0}
     - target: {fileID: 7770706058131865058, guid: d6961cd8b8dde1f408b55eec89a6e6fa, type: 3}
       propertyPath: m_RootOrder
@@ -55,27 +91,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8729427909318365527, guid: d6961cd8b8dde1f408b55eec89a6e6fa, type: 3}
-      propertyPath: m_Height
-      value: 1.7
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6961cd8b8dde1f408b55eec89a6e6fa, type: 3}
---- !u!1 &2250253427139579806 stripped
+--- !u!1 &1478384985885071047 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7764892687506653992, guid: d6961cd8b8dde1f408b55eec89a6e6fa, type: 3}
-  m_PrefabInstance: {fileID: 8428752043666984118}
+  m_PrefabInstance: {fileID: 9171078772083889647}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8608251891110696833
+--- !u!114 &3515821071969181099
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2250253427139579806}
+  m_GameObject: {fileID: 1478384985885071047}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8b1071f51e8ba348b4f9e38d552987f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uid: e46bd4e8-7b5b-4204-b82f-3112f035f733
+  uid: 421af94d-8b82-45f7-a3de-315120a948ae

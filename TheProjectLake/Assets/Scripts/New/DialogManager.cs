@@ -25,7 +25,8 @@ namespace SoulsLike
         private float mOptionTopPosition;
 
         private float mTimerToShowOptions;
-        private bool mForceDialogQu
+        
+        private bool mForceDialogQuit;
 
         const float cDistanceBetweenOption = 34.0f;
 
@@ -78,8 +79,18 @@ namespace SoulsLike
                 mTimerToShowOptions += Time.deltaTime;
                 if(mTimerToShowOptions >= timeToShowOptions)
                 {
-                    mTimerToShowOptions = 0;
-                    DisplayDialogOptions();
+                     mTimerToShowOptions = 0;
+                    if(mForceDialogQuit)
+                    {
+                        StopDialog();
+                    }
+                    else
+                    {
+                        DisplayDialogOptions();
+                    }
+
+                   
+                    
                 }
             }
         }
@@ -153,6 +164,16 @@ namespace SoulsLike
             
             pointerDown.callback.AddListener((e) => {
 
+                if(!String.IsNullOrEmpty(query.answer.questID))
+                {
+                    mPlayer.GetComponent<QuestLog>().AddQuest(mNpc.quest);
+                }
+
+                if(query.answer.isForceDialogQuit)
+                {
+                    mForceDialogQuit = true;
+                }
+                
                 if(!query.isAlwaysAsked)
                 {
                     query.isAsked = true;
@@ -172,7 +193,9 @@ namespace SoulsLike
             mNpc = null;
             mActiveDialog = null;
             mTimerToShowOptions = 0;
+            mForceDialogQuit = false;
             dialogUI.SetActive(false);
+            
         }
 
         private void ClearDialogOptions()
