@@ -12,6 +12,8 @@ namespace SoulsLike
         public float invulnerabilityTime = 0.5f;
         public int maxHitPoints;
         public int CurrentHitPoints { get; private set; }
+        public int experince;
+        public LayerMask playerActionReceivers;
         public List<MonoBehaviour> onDamageMessageReceivers;
 
         private bool IsInvulnerable;
@@ -21,8 +23,11 @@ namespace SoulsLike
         private void Awake()
         {
             CurrentHitPoints = maxHitPoints;
-
-            onDamageMessageReceivers.Add(FindObjectOfType<QuestManager>());
+            if(0 != (playerActionReceivers.value & 1 << gameObject.layer)){
+                onDamageMessageReceivers.Add(FindObjectOfType<QuestManager>());
+                onDamageMessageReceivers.Add(FindObjectOfType<PlayerStats>());
+            }
+            
         }
 
         private void Update()

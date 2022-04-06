@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 616980907, guid: d93353dc57e93164e8174a3c1955cb92, type: 3}
+      propertyPath: experince
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 616980907, guid: d93353dc57e93164e8174a3c1955cb92, type: 3}
       propertyPath: maxHitPoints
       value: 40
       objectReference: {fileID: 0}
