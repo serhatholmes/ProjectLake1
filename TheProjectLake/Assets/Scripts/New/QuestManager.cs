@@ -26,11 +26,14 @@ namespace SoulsLike
     public class QuestManager : MonoBehaviour, iMessageReceiver
     {
         public Quest[] quests;
+        private PlayerStats mPlayerStats;
 
         private void Awake()
         {
             LoadQuestsFromDB();
             AssignQuests();
+
+            mPlayerStats = FindObjectOfType<PlayerStats>();
         }
 
         private void LoadQuestsFromDB()
@@ -97,7 +100,8 @@ namespace SoulsLike
                         if(quest.amount == 0)
                         {
                             quest.status = QuestStatus.COMPLETED;
-                            Debug.Log("quest done");
+                            //Debug.Log("quest done");
+                            mPlayerStats.GainExperience(quest.experience);
                         }
                     }
                 }

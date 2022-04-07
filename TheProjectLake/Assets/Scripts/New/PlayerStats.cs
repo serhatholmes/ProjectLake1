@@ -11,7 +11,12 @@ namespace SoulsLike
         public int currentLevel;
         public int currentExp;
         public int[] availableLevels;
-
+        public int ExperienceToNextLevel{
+            get
+            {
+                return availableLevels[currentLevel] - currentExp;
+            }
+        }
         private void Awake() {
 
             availableLevels = new int[maxLevel];
@@ -41,9 +46,24 @@ namespace SoulsLike
             
         }
 
-        public void GainExperience(int exp)
+        public void GainExperience(int gainedExp)
         {
-            Debug.Log("gaining"+exp);
+            if(gainedExp > ExperienceToNextLevel){
+                var remainderExp = gainedExp - ExperienceToNextLevel;
+                currentExp = 0;
+                currentLevel++;
+                GainExperience(remainderExp);
+            }
+            else if(gainedExp == ExperienceToNextLevel)
+            {
+                currentLevel++;
+                currentExp=0;
+
+            }
+            else
+            {
+                currentExp += gainedExp;
+            }
         }
 
        
