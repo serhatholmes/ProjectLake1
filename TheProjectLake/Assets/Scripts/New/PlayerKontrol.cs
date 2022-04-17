@@ -26,7 +26,7 @@ namespace SoulsLike
         public float mMaxRotationSpeed = 1200;
         public float mMinRotationSpeed = 800;
         public float gravity = 20.0f;
-
+        public Transform attackHand;
 
         private PlayerInput mPlayerInput;
         private CharacterController chCont;
@@ -55,7 +55,7 @@ namespace SoulsLike
 
             sInstance = this;
 
-            meleeWeapon.SetOwner(gameObject);
+            
         }
 
     
@@ -119,6 +119,23 @@ namespace SoulsLike
         public void MeleeAttackEnd()
         {
             meleeWeapon.AttackEnd();
+        }
+
+        public void UseItemFrom(InventorySlot slot)
+        {
+            if(meleeWeapon !=null){
+
+                if(slot.itemPrefab.name == meleeWeapon.name){ return;}
+                else { Destroy(meleeWeapon.gameObject);}
+                
+
+            }
+
+            //Debug.Log("using item: " + inventorySlot.itemName);
+            meleeWeapon = Instantiate(slot.itemPrefab,transform).GetComponent<MeleeWeapons>();
+           meleeWeapon.GetComponent<FollowFixedUpdate>().SetFollowe(attackHand); 
+           meleeWeapon.name = slot.itemPrefab.name;
+            meleeWeapon.SetOwner(gameObject);
         }
 
         private void ComputeVerticalMovement()

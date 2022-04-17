@@ -13,8 +13,17 @@ public class FollowFixedUpdate : MonoBehaviour
 
    void FixedUpdate()
     {
+            if(toFollow==null)
+            {
+                    return;
+            }
             transform.position = toFollow.position;
             transform.rotation = toFollow.rotation;
+    }
+
+    public void SetFollowe(Transform followe)
+    {
+            toFollow= followe;
     }
 }
 

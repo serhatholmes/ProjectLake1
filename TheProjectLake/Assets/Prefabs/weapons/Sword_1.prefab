@@ -27,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5914819542418510465}
-  m_LocalRotation: {x: -0.6754151, y: 0.1255169, z: -0.015404312, w: 0.7265141}
-  m_LocalPosition: {x: 51.75577, y: 67.22119, z: 13.766454}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -77.831, y: 74.56, z: -65.578}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5914819542417608321
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -113,12 +113,12 @@ MonoBehaviour:
     m_Bits: 64
   damage: 10
   attackPoints:
-  - radius: 0.08
+  - radius: 0.09
     offset: {x: -0.23, y: 0.1, z: 0.83}
     rootTransform: {fileID: 5914819542418411169}
-  - radius: 0.08
+  - radius: 0.09
     offset: {x: -0.2, y: 0.08, z: 0.66}
     rootTransform: {fileID: 5914819542418411169}
-  - radius: 0.08
-    offset: {x: -0.14, y: 0.05, z: 0.5}
+  - radius: 0.1
+    offset: {x: -0.16, y: 0.05, z: 0.5}
     rootTransform: {fileID: 5914819542418411169}

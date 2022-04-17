@@ -2171,7 +2171,7 @@ GameObject:
   - component: {fileID: 4942847026553567634}
   - component: {fileID: 1544369197}
   - component: {fileID: 2010471387}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2297,6 +2297,7 @@ MonoBehaviour:
   mMaxRotationSpeed: 1200
   mMinRotationSpeed: 800
   gravity: 8
+  attackHand: {fileID: 4942608210775558117}
 --- !u!114 &1253087608536264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2325,6 +2326,10 @@ MonoBehaviour:
   hitAngle: 360
   invulnerabilityTime: 0.5
   maxHitPoints: 200
+  experince: 0
+  playerActionReceivers:
+    serializedVersion: 2
+    m_Bits: 0
   onDamageMessageReceivers: []
 --- !u!114 &1544369197
 MonoBehaviour:
