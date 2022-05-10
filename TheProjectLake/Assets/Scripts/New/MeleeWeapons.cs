@@ -18,7 +18,8 @@ namespace SoulsLike
         public LayerMask targetLayers;
         public int damage = 10;
         public AttackPoint[] attackPoints = new AttackPoint[0];
-
+        public RandomAudioPlayer swingAudio;
+        public RandomAudioPlayer impactAudio;
       
 
         private bool IsAttack = false;
@@ -80,6 +81,10 @@ namespace SoulsLike
                 data.damager = this;
                 
                 data.damageSource = mOwner;
+                if(impactAudio != null)
+                {
+                    impactAudio.PlayRandomClip();
+                }
                 damageable.ApplyDamage(data);
             }
 
@@ -93,6 +98,7 @@ namespace SoulsLike
 
         public void AttackBegin()
         {
+            swingAudio.PlayRandomClip();
             IsAttack = true;
             originalAttackPos = new Vector3[attackPoints.Length];
 

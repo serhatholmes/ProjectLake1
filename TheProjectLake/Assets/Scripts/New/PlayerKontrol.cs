@@ -6,7 +6,7 @@ namespace SoulsLike
 
 {
 
-    public class PlayerKontrol : MonoBehaviour
+    public class PlayerKontrol : MonoBehaviour, IAttackAnimListener, iMessageReceiver
     {
         public static PlayerKontrol Instance
         {
@@ -27,6 +27,7 @@ namespace SoulsLike
         public float mMinRotationSpeed = 800;
         public float gravity = 20.0f;
         public Transform attackHand;
+        public RandomAudioPlayer sprintSound;
 
         private PlayerInput mPlayerInput;
         private CharacterController chCont;
@@ -38,7 +39,7 @@ namespace SoulsLike
 
         private readonly int HashForwardSpeed = Animator.StringToHash("ForwardSpeed");
         private readonly int HashMeleeAttack = Animator.StringToHash("MeleeAttack");
-
+        private readonly int HashFootFall = Animator.StringToHash("Footfall");
         private Quaternion mTargetRotation;
 
         private float desiredForwardSpeed;
@@ -86,6 +87,8 @@ namespace SoulsLike
                 mAnimator.SetTrigger(HashMeleeAttack);
                 
             }
+
+            PlaySprintAudio();
             /* float horizontalInput = Input.GetAxis("Horizontal");
              float verticalInput = Input.GetAxis("Vertical");
 
@@ -112,13 +115,20 @@ namespace SoulsLike
 
         public void MeleeAttackStart()
         {
-            
-            meleeWeapon.AttackBegin();
+            if(meleeWeapon != null)
+            {
+                meleeWeapon.AttackBegin();
+            }   
+           
         }
 
         public void MeleeAttackEnd()
         {
-            meleeWeapon.AttackEnd();
+             if(meleeWeapon != null)
+            {
+                meleeWeapon.AttackEnd();
+            }   
+           
         }
 
         public void UseItemFrom(InventorySlot slot)
@@ -150,6 +160,14 @@ namespace SoulsLike
             movement += mVerticalSpeed * Vector3.up * Time.fixedDeltaTime;
             
             chCont.Move(movement);
+        }
+
+        public void OnReceiveMessage(MessageType type, object sender, object msg)
+        {
+            if(type == MessageType.DAMAGED)
+            {
+                Debug.Log("receiving damage" + (sender as Damageable).CurrentHitPoints);
+            }
         }
 
 
@@ -189,6 +207,26 @@ namespace SoulsLike
             mTargetRotation = targetRotation;
 
         }
+
+       private void PlaySprintAudio()
+       {
+           float footFallCurve = mAnimator.GetFloat(HashFootFall);
+
+           if(footFallCurve >0.01f && !sprintSound.isPlaying && sprintSound.canPlay)
+           {
+               sprintSound.isPlaying = true;
+               sprintSound.canPlay = false;
+               sprintSound.PlayRandomClip();
+           }
+           else if (sprintSound.isPlaying)
+           {
+               sprintSound.isPlaying = false;
+           }
+           else if (footFallCurve <0.01 && !sprintSound.canPlay)
+           {
+               sprintSound.canPlay = true;
+           }
+       } 
 
     }
 }

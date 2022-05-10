@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
+
 namespace SoulsLike
 {
-    public class EnemyBehaviour : MonoBehaviour, iMessageReceiver
+    public class EnemyBehaviour : MonoBehaviour, iMessageReceiver, IAttackAnimListener
     {
 
         public PlayerScanner playerScanner;
-
+        public MeleeWeapons meleeWeapons;
         public float timeToStopPursuit = 2.0f;
         public float timeToWaitOnPursuit = 2.0f;
         public float attackDistance = 1.3f;
@@ -44,6 +45,7 @@ namespace SoulsLike
             mOriginalPosition = transform.position;
            
             mOriginalRotation = transform.rotation;
+            meleeWeapons.SetOwner(gameObject);
         }
         private void Update()
         {
@@ -110,6 +112,18 @@ namespace SoulsLike
                     break;
 
             }
+        }
+
+        public void MeleeAttackStart()
+        {
+            Debug.Log("Starting attack");
+            meleeWeapons.AttackBegin();
+        }
+
+        public void MeleeAttackEnd()
+        {
+            Debug.Log("ending attack");
+            meleeWeapons.AttackEnd();
         }
 
         private void OnDead()
